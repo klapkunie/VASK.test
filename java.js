@@ -1,66 +1,56 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz</title>
-</head>
-<body>
-    <h1>Quiz</h1>
-    <form id="quizForm">
-        <p>1. Czy lubisz koty?</p>
-        <input type="radio" name="odpowiedz1" value="miłość"> Miłość
-        <input type="radio" name="odpowiedz1" value="szacunek"> Szacunek <br>
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("quizForm");
 
-        <p>2. Czy lubisz psy?</p>
-        <input type="radio" name="odpowiedz2" value="bałagan"> Bałagan
-        <input type="radio" name="odpowiedz2" value="porządek"> Porządek <br>
+    form.addEventListener("submit", function(event) {
+        event.preventDefault(); // Zapobiegamy domyślnemu zachowaniu formularza
 
-        <p>3. Czy lubisz być w grupie?</p>
-        <input type="radio" name="odpowiedz3" value="w grupie"> W grupie
-        <input type="radio" name="odpowiedz3" value="samemu"> Samemu <br>
+        const formData = new FormData(form);
+        const answers = {};
+        const totalResponses = { "1": 0, "2": 0, "3": 0 }; // Licznik dla każdej odpowiedzi
 
-        <button type="submit">Wyślij odpowiedzi</button>
-    </form>
-
-    <div id="results"></div>
-
-    <script>
-        document.getElementById('quizForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            var odpowiedz1 = document.querySelector('input[name="odpowiedz1"]:checked').value;
-            var odpowiedz2 = document.querySelector('input[name="odpowiedz2"]:checked').value;
-            var odpowiedz3 = document.querySelector('input[name="odpowiedz3"]:checked').value;
-
-            var licznikWzrokowiec = 0, licznikKinestetyk = 0;
-
-            if (odpowiedz1 === "miłość") {
-                licznikWzrokowiec++;
-            } else {
-                licznikKinestetyk++;
-            }
-
-            if (odpowiedz2 === "bałagan") {
-                licznikKinestetyk++;
-            } else {
-                licznikWzrokowiec++;
-            }
-
-            if (odpowiedz3 === "w grupie") {
-                licznikWzrokowiec++;
-            } else {
-                licznikKinestetyk++;
-            }
-
-            var procentWzrokowiec = (licznikWzrokowiec / 3) * 100;
-            var procentKinestetyk = (licznikKinestetyk / 3) * 100;
-
-            var wyniki = document.getElementById('results');
-            wyniki.innerHTML = "<h2>Odpowiedzi w procentach:</h2>" +
-                                "<p>Wzrokowiec: " + procentWzrokowiec.toFixed(2) + "%</p>" +
-                                "<p>Kinestetyk/Czuciowiec: " + procentKinestetyk.toFixed(2) + "%</p>";
+        // Przetwarzanie odpowiedzi z formularza
+        formData.forEach((value, name) => {
+            answers[name] = value;
+            totalResponses[value]++; // Zwiększ licznik dla danej odpowiedzi
         });
-    </script>
-</body>
-</html>
+
+        // Wyświetlanie wyników
+        displayResults(answers, totalResponses);
+    });
+
+    // Funkcja do wyświetlania wyników quizu
+    function displayResults(answers, totalResponses) {
+        const resultsContainer = document.getElementById("results");
+        resultsContainer.innerHTML = ""; // Czyszczenie wyników przed wyświetleniem nowych
+
+        // Przetwarzanie odpowiedzi i wyświetlanie wyników dla każdego pytania
+        const result = document.createElement("p");
+        result.textContent = `Wyniki quizu:`;
+
+        resultsContainer.appendChild(result); // Dodawanie wyniku do kontenera wyników
+
+        for (const questionNumber in totalResponses) {
+            const responseCount = totalResponses[questionNumber];
+            const responsePercentage = (responseCount / Object.keys(answers).length) * 100;
+            const questionResult = document.createElement("p");
+
+            // Wyświetlenie wyniku procentowego dla danej odpowiedzi
+            switch (questionNumber) {
+                case "1":
+                    questionResult.textContent = `kinestetyk/czuciowiec = ${responsePercentage.toFixed(2)}%`;
+                    break;
+                case "2":
+                    questionResult.textContent = `wzrokowiec = ${responsePercentage.toFixed(2)}%`;
+                    break;
+                case "3":
+                    questionResult.textContent = `słuchowiec = ${responsePercentage.toFixed(2)}%`;
+                    break;
+                default:
+                    questionResult.textContent = `Brak odpowiedzi`;
+                    break;
+            }
+
+            resultsContainer.appendChild(questionResult); // Dodawanie wyniku pytania do kontenera wyników
+        }
+    }
+});
