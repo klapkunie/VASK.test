@@ -4,63 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz</title>
+    <style>
+        /* Dodatkowe stylowanie */
+        h1 {
+            text-align: center; /* Wyśrodkowanie tekstu */
+        }
+    </style>
 </head>
 <body>
+    <!-- Nagłówek "Quiz" -->
     <h1>Quiz</h1>
+    <!-- Formularz z pytaniem i odpowiedziami -->
     <form id="quizForm">
-        <p>1. Czy lubisz koty?</p>
-        <input type="radio" name="odpowiedz1" value="miłość"> Miłość
-        <input type="radio" name="odpowiedz1" value="szacunek"> Szacunek <br>
-
-        <p>2. Czy lubisz psy?</p>
-        <input type="radio" name="odpowiedz2" value="bałagan"> Bałagan
-        <input type="radio" name="odpowiedz2" value="porządek"> Porządek <br>
-
-        <p>3. Czy lubisz być w grupie?</p>
-        <input type="radio" name="odpowiedz3" value="w grupie"> W grupie
-        <input type="radio" name="odpowiedz3" value="samemu"> Samemu <br>
-
+        <!-- Pierwsze pytanie -->
+        <p>Jaki jest twój stosunek odnośnie czytania?</p>
+        <!-- Odpowiedzi jako przyciski typu radio -->
+        <input type="radio" name="odpowiedz1" value="1"> Nie lubię czytać/jest mi obojętne<br>
+        <input type="radio" name="odpowiedz1" value="2"> Sprawia mi przyjemność/jest formą relaksu<br>
+        <input type="radio" name="odpowiedz1" value="3"> Preferuję audiobooki<br>
+        <!-- Drugie pytanie -->
+        <p>Co w pierwszej kolejności wykonasz po kilku nieudanych próbach złożenia dostarczonego w częściach drewnianego stołu?</p>
+        <!-- Odpowiedzi jako przyciski typu radio -->
+        <input type="radio" name="odpowiedz2" value="1"> Obejrzysz film przedstawiający osobę składającą podobny stół. <br>
+        <input type="radio" name="odpowiedz2" value="2"> Ponownie przeczytasz i przeanalizujesz schematy demonstrujące każdy etap montażu zawarte w instrukcji. <br>
+        <input type="radio" name="odpowiedz2" value="3"> Poprosisz o radę kogoś, kto zna się na składaniu mebli.<br>
+        <!-- Trzecie pytanie -->
+        <p>Największe skupienie na przekazywaną treść w trakcie rozmowy osiągasz, kiedy:</p>
+        <!-- Odpowiedzi jako przyciski typu radio -->
+        <div id="answers3"></div>
+        <!-- Pozostałe pytania i odpowiedzi -->
+        <!-- Przycisk do zatwierdzenia odpowiedzi -->
         <button type="submit">Wyślij odpowiedzi</button>
     </form>
-
+    <!-- Wyniki -->
     <div id="results"></div>
-
-    <script>
-        document.getElementById('quizForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-
-            var odpowiedz1 = document.querySelector('input[name="odpowiedz1"]:checked').value;
-            var odpowiedz2 = document.querySelector('input[name="odpowiedz2"]:checked').value;
-            var odpowiedz3 = document.querySelector('input[name="odpowiedz3"]:checked').value;
-
-            var licznikWzrokowiec = 0, licznikKinestetyk = 0;
-
-            if (odpowiedz1 === "miłość") {
-                licznikWzrokowiec++;
-            } else {
-                licznikKinestetyk++;
-            }
-
-            if (odpowiedz2 === "bałagan") {
-                licznikKinestetyk++;
-            } else {
-                licznikWzrokowiec++;
-            }
-
-            if (odpowiedz3 === "w grupie") {
-                licznikWzrokowiec++;
-            } else {
-                licznikKinestetyk++;
-            }
-
-            var procentWzrokowiec = (licznikWzrokowiec / 3) * 100;
-            var procentKinestetyk = (licznikKinestetyk / 3) * 100;
-
-            var wyniki = document.getElementById('results');
-            wyniki.innerHTML = "<h2>Odpowiedzi w procentach:</h2>" +
-                                "<p>Wzrokowiec: " + procentWzrokowiec.toFixed(2) + "%</p>" +
-                                "<p>Kinestetyk/Czuciowiec: " + procentKinestetyk.toFixed(2) + "%</p>";
-        });
-    </script>
+  
 </body>
 </html>
