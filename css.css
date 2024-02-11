@@ -1,7 +1,7 @@
 /* Stylowanie nagłówka */
 h1 {
-    color: navy; /* Kolor tekstu */
-    font-family: Arial, sans-serif; /* Rodzina czcionek */
+    color: Green; /* Kolor tekstu */
+    font-family: Times New Roman, sans-serif; /* Rodzina czcionek */
     text-align: center; /* Wyśrodkowanie tekstu */
 }
 
