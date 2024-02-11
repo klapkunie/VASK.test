@@ -1,0 +1,25 @@
+/* Stylowanie nagłówka */
+h1 {
+    color: navy; /* Kolor tekstu */
+    font-family: Arial, sans-serif; /* Rodzina czcionek */
+    text-align: center; /* Wyśrodkowanie tekstu */
+}
+
+/* Stylowanie przycisku */
+button {
+    background-color: #4CAF50; /* Kolor tła */
+    color: white; /* Kolor tekstu */
+    padding: 10px 20px; /* Wielkość wypełnienia */
+    border: none; /* Brak obramowania */
+    cursor: pointer; /* Kursor podczas najechania */
+}
+
+/* Stylowanie wyników */
+#results {
+    margin-top: 20px; /* Margines od góry */
+}
+
+/* Stylowanie odpowiedzi w formularzu */
+input[type="radio"] {
+    margin-right: 5px; /* Margines od prawej strony */
+}
