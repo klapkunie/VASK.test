@@ -8,7 +8,7 @@ h1 {
 /* Stylowanie przycisku */
 button {
     background-color: #4CAF50; /* Kolor tła */
-    color: white; /* Kolor tekstu */
+    color: green; /* Kolor tekstu */
     padding: 10px 20px; /* Wielkość wypełnienia */
     border: none; /* Brak obramowania */
     cursor: pointer; /* Kursor podczas najechania */
